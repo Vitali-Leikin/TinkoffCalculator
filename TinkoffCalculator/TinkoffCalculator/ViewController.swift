@@ -40,6 +40,9 @@ class ViewController: UIViewController {
 
     
     var calculationHistory:[CalculationHistoryItem] = []
+    var calculation:[(expression: [CalculationHistoryItem], result: Double)] = []
+
+    
     var checkCalculation: Bool = false
     
     lazy var numberFormatter: NumberFormatter = {
@@ -52,10 +55,12 @@ class ViewController: UIViewController {
     }()
 
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet var historyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetLabel()
+        historyButton.accessibilityIdentifier = "historyButton"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,9 +93,9 @@ class ViewController: UIViewController {
         let calculationListVC = sb.instantiateViewController(identifier: "CalculationListController")
         if let vc = calculationListVC as? CalculationListController{
             if checkCalculation{
-                vc.result = textLabel.text
+                vc.calculation = calculation
             }else{
-                vc.result = "NoData"
+              //  vc.result = "NoData"
             }
         
         }
@@ -145,6 +150,7 @@ class ViewController: UIViewController {
         do {
             let result = try calculate()
             textLabel.text = numberFormatter.string(from: NSNumber(value: result))
+            calculation.append((calculationHistory, result))
             checkCalculation = true
         }catch {
             textLabel.text = "Нельзя делить на ноль"

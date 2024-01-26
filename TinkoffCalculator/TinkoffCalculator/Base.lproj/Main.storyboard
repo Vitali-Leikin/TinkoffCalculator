@@ -310,6 +310,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Калькулятор" id="oL1-wq-zRx"/>
                     <connections>
+                        <outlet property="historyButton" destination="fji-FM-VaG" id="5Vt-w3-FFy"/>
                         <outlet property="textLabel" destination="qbQ-GT-MCX" id="BIz-X8-Iua"/>
                     </connections>
                 </viewController>
@@ -325,41 +326,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cd4-rw-2t6">
-                                <rect key="frame" x="215" y="466" width="0.0" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNb-Lc-WwP">
-                                <rect key="frame" x="169.66666666666666" y="507.66666666666674" width="90.999999999999972" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Закрыть"/>
-                                <connections>
-                                    <action selector="dismissVC:" destination="SEk-eM-9qp" eventType="touchUpInside" id="Y60-7p-Tgb"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результат" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogI-KT-5Gf">
-                                <rect key="frame" x="175.66666666666666" y="387" width="79" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-1q-wRz">
+                                <rect key="frame" x="0.0" y="59" width="430" height="839"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="X90-rI-8Ri"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
-                            <constraint firstItem="cd4-rw-2t6" firstAttribute="centerX" secondItem="lQI-dl-zTF" secondAttribute="centerX" id="CIA-5n-Co4"/>
-                            <constraint firstItem="ogI-KT-5Gf" firstAttribute="centerX" secondItem="lQI-dl-zTF" secondAttribute="centerX" id="Dpa-ph-Gdf"/>
-                            <constraint firstItem="CNb-Lc-WwP" firstAttribute="top" secondItem="cd4-rw-2t6" secondAttribute="bottom" constant="41.666666666666686" id="gQ9-3b-NSh"/>
-                            <constraint firstItem="cd4-rw-2t6" firstAttribute="top" secondItem="ogI-KT-5Gf" secondAttribute="bottom" constant="58" id="oWM-Aj-5mP"/>
-                            <constraint firstItem="CNb-Lc-WwP" firstAttribute="centerX" secondItem="lQI-dl-zTF" secondAttribute="centerX" id="rqt-is-pzt"/>
-                            <constraint firstItem="cd4-rw-2t6" firstAttribute="centerY" secondItem="lQI-dl-zTF" secondAttribute="centerY" id="siZ-uS-bt0"/>
+                            <constraint firstItem="X90-rI-8Ri" firstAttribute="bottom" secondItem="8OZ-1q-wRz" secondAttribute="bottom" id="Jq9-gc-fiz"/>
+                            <constraint firstItem="8OZ-1q-wRz" firstAttribute="leading" secondItem="X90-rI-8Ri" secondAttribute="leading" id="Qsy-YC-HHK"/>
+                            <constraint firstItem="X90-rI-8Ri" firstAttribute="trailing" secondItem="8OZ-1q-wRz" secondAttribute="trailing" id="gpO-Ba-fz4"/>
+                            <constraint firstItem="8OZ-1q-wRz" firstAttribute="top" secondItem="X90-rI-8Ri" secondAttribute="top" id="nDR-rH-gQ8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BrZ-0c-Cz2"/>
                     <connections>
-                        <outlet property="calculationLabel" destination="cd4-rw-2t6" id="CXe-U5-u42"/>
+                        <outlet property="tableView" destination="8OZ-1q-wRz" id="QJK-QT-YEW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rSW-qz-bQ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
