@@ -38,11 +38,9 @@ enum CalculationHistoryItem{
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var textLabel: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        resetLabel()
-    }
+    
+    var calculationHistory:[CalculationHistoryItem] = []
+    var checkCalculation: Bool = false
     
     lazy var numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -52,9 +50,21 @@ class ViewController: UIViewController {
         
         return numberFormatter
     }()
-    
-    var calculationHistory:[CalculationHistoryItem] = []
 
+    @IBOutlet weak var textLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        resetLabel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+     //   navigationController?.setNavigationBarHidden(true, animated: false)
+        
+    }
+    
+  
     @IBAction func buttonPressed(_ sender: UIButton) {
         guard let buttonText = sender.currentTitle else {return}
       //  print(buttonText)
@@ -72,6 +82,36 @@ class ViewController: UIViewController {
             textLabel.text?.append(buttonText)
         }
     }
+    
+    @IBAction func showCalculationLIst(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let calculationListVC = sb.instantiateViewController(identifier: "CalculationListController")
+        if let vc = calculationListVC as? CalculationListController{
+            if checkCalculation{
+                vc.result = textLabel.text
+            }else{
+                vc.result = "NoData"
+            }
+        
+        }
+        
+      //  show(calculationListVC, sender: self)
+        
+        navigationController?.pushViewController(calculationListVC, animated: true)
+    }
+    
+    
+//    @IBAction func unwindAction(unwindSeque: UIStoryboardSegue){
+//        
+//    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard segue.identifier == "calculationList",
+//              let calculationListVC = segue.destination as? CalculationListController
+//        else {return}
+//
+//        calculationListVC.result = textLabel.text
+//    }
     
     @IBAction func operationButtonPressed(_ sender: UIButton) {
         guard let buttonText = sender.currentTitle,
@@ -105,16 +145,20 @@ class ViewController: UIViewController {
         do {
             let result = try calculate()
             textLabel.text = numberFormatter.string(from: NSNumber(value: result))
+            checkCalculation = true
         }catch {
             textLabel.text = "Нельзя делить на ноль"
+            checkCalculation = false
         }
-
+        
         calculationHistory.removeAll()
     }
     
+
     
     func resetLabel(){
         textLabel.text = "0"
+        checkCalculation = false
     }
     
     
